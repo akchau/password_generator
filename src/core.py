@@ -35,12 +35,12 @@ def secrets_shuffle(lst):
         lst[i], lst[j] = lst[j], lst[i]
 
 
-def generate_password(length: int) -> str:
+def generate(length: int) -> str:
     """ Генерация паролей """
     if length < len(__pool_password_sign):
         raise ValueError(
-            "Password length must be at least "
-            f"{len(__pool_password_sign)} to include all categories"
+            "Пароль не может содержать меньше символов чем категорий символов "
+            f"{len(__pool_password_sign)}"
         )
     password_chars = []
     for _, symbols in __pool_password_sign.items():
@@ -55,10 +55,10 @@ def generate_password(length: int) -> str:
     return ''.join(password_chars)
 
 
-def generate_password_with_random_length():
+def generate_password() -> str:
     """ Выбор длинны пароля и вызов генерации """
     password_length = secrets.choice(range(12, 17))
-    return generate_password(password_length)
+    return generate(password_length)
 
 
-print(generate_password_with_random_length())
+print(generate_password())
